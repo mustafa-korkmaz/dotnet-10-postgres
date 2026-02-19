@@ -1,6 +1,17 @@
 @API_HostAddress = http://localhost:5217
+@orderId = 401ab822-41c0-4bbd-bd79-8f1f59b5f389
 
-GET {{API_HostAddress}}/weatherforecast/
+GET {{API_HostAddress}}/v1/orders?includeRecordsTotal=true
+Accept: application/json
+
+###
+
+GET {{API_HostAddress}}/v1/orders/{{orderId}}
+Accept: application/json
+
+###
+
+GET {{API_HostAddress}}/v1/products
 Accept: application/json
 
 ###
