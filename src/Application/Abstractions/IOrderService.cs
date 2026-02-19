@@ -7,10 +7,10 @@ namespace Application.Abstractions
 {
     public interface IOrderService
     {
-        Task<Guid> CreateOrderAsync(Order order);
+        Task<Guid> CreateAsync(Order order);
 
-        Task<OrderDetailDto> GetOrderDetailsAsync(Guid id);
+        Task<OrderDetailDto> GetDetailsAsync(Guid id);
 
-        Task<PagedResult<OrderDto>> ListOrdersAsync(ListOrdersQuery query);
+        Task<PagedResult<OrderDto>> ListAsync(ListOrdersQuery query);
     }
 }

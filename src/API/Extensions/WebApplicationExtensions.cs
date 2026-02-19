@@ -23,14 +23,14 @@ namespace API.Extensions
                 CreateProductRequest request,
                     IProductService service) =>
             {
-                Guid id = await service.CreateProductAsync(request.ToDomainModel());
+                Guid id = await service.CreateAsync(request.ToDomainModel());
 
                 return TypedResults.Created($"{ProductRoutePattern}/{id}", id);
             });
 
             app.MapGet(ProductRoutePattern, async (
                 [AsParameters] PaginationRequest request,
-                IProductService service) => await service.ListProductsAsync(request.ToPaginationOptions()));
+                IProductService service) => await service.ListAsync(request.ToPaginationOptions()));
         }
 
         private static void MapOrderEndpoints(this WebApplication app)
@@ -39,18 +39,18 @@ namespace API.Extensions
                 CreateOrderRequest request,
                 IOrderService service) =>
             {
-                Guid id = await service.CreateOrderAsync(request.ToDomainModel());
+                Guid id = await service.CreateAsync(request.ToDomainModel());
 
                 return TypedResults.Created($"{OrderRoutePattern}/{id}", id);
             });
 
             app.MapGet($"{OrderRoutePattern}/{{id:guid}}", async (
                  Guid id,
-                 IOrderService service) => await service.GetOrderDetailsAsync(id));
+                 IOrderService service) => await service.GetDetailsAsync(id));
 
             app.MapGet(OrderRoutePattern, async (
                 [AsParameters] ListOrdersRequest request,
-                IOrderService service) => await service.ListOrdersAsync(request.ToQuery()));
+                IOrderService service) => await service.ListAsync(request.ToQuery()));
         }
     }
 }

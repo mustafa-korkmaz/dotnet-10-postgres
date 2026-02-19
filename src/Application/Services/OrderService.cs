@@ -11,14 +11,14 @@ namespace Application.Services
     {
         private const string NotFoundErrorMessage = "Order with id {0} was not found";
 
-        public async Task<Guid> CreateOrderAsync(Order order)
+        public async Task<Guid> CreateAsync(Order order)
         {
             await orderRepository.CreateAsync(order);
 
             return order.Id;
         }
 
-        public async Task<OrderDetailDto> GetOrderDetailsAsync(Guid id)
+        public async Task<OrderDetailDto> GetDetailsAsync(Guid id)
         {
             Order? order = await orderRepository.GetDetailsAsync(id);
 
@@ -30,9 +30,9 @@ namespace Application.Services
             return order.ToOrderDetailDto();
         }
 
-        public async Task<PagedResult<OrderDto>> ListOrdersAsync(ListOrdersQuery query)
+        public async Task<PagedResult<OrderDto>> ListAsync(ListOrdersQuery query)
         {
-            PagedResult<Order> result = await orderRepository.ListOrdersAsync(query);
+            PagedResult<Order> result = await orderRepository.ListAsync(query);
 
             return new PagedResult<OrderDto>(
                 result.Items.ToOrderDtos(),

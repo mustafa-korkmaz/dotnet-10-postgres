@@ -10,6 +10,6 @@ namespace Application.Abstractions
 
         Task<Order?> GetDetailsAsync(Guid id);
 
-        Task<PagedResult<Order>> ListOrdersAsync(ListOrdersQuery query);
+        Task<PagedResult<Order>> ListAsync(ListOrdersQuery query);
     }
 }

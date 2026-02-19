@@ -21,7 +21,7 @@ namespace Infrastructure.Persistence.Repositories
                 .FirstOrDefaultAsync(o => o.Id == id);
         }
 
-        public async Task<PagedResult<Order>> ListOrdersAsync(ListOrdersQuery query)
+        public async Task<PagedResult<Order>> ListAsync(ListOrdersQuery query)
         {
             int total = 0;
             IQueryable<Order> orders = dbContext.Orders.AsQueryable();

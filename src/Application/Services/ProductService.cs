@@ -8,18 +8,18 @@ namespace Application.Services
 {
     public class ProductService(IProductRepository productRepository) : IProductService
     {
-        public async Task<PagedResult<ProductDto>> ListProductsAsync(PaginationOptions paginationOptions)
+        public async Task<PagedResult<ProductDto>> ListAsync(PaginationOptions paginationOptions)
         {
-            PagedResult<Product> result = await productRepository.ListProductsAsync(paginationOptions);
+            PagedResult<Product> result = await productRepository.ListAsync(paginationOptions);
 
             return new PagedResult<ProductDto>(
                 result.Items.ToProductDtos(),
                 result.RecordsTotal);
         }
 
-        public async Task<Guid> CreateProductAsync(Product product)
+        public async Task<Guid> CreateAsync(Product product)
         {
-            await productRepository.CreateProductAsync(product);
+            await productRepository.CreateAsync(product);
 
             return product.Id;
         }

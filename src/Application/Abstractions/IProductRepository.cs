@@ -5,8 +5,8 @@ namespace Application.Abstractions
 {
     public interface IProductRepository
     {
-        Task<PagedResult<Product>> ListProductsAsync(PaginationOptions paginationOptions);
+        Task<PagedResult<Product>> ListAsync(PaginationOptions paginationOptions);
 
-        Task CreateProductAsync(Product product);
+        Task CreateAsync(Product product);
     }
 }

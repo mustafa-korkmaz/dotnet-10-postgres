@@ -7,7 +7,7 @@ namespace Infrastructure.Persistence.Repositories
 {
     internal class ProductRepository(PostgresDbContext dbContext) : IProductRepository
     {
-        public async Task<PagedResult<Product>> ListProductsAsync(PaginationOptions paginationOptions)
+        public async Task<PagedResult<Product>> ListAsync(PaginationOptions paginationOptions)
         {
             int total = 0;
             IQueryable<Product> products = dbContext.Products.AsQueryable();
@@ -27,7 +27,7 @@ namespace Infrastructure.Persistence.Repositories
                 items,
                 total);
         }
-        public async Task CreateProductAsync(Product product)
+        public async Task CreateAsync(Product product)
         {
             await dbContext.Products.AddAsync(product);
             await dbContext.SaveChangesAsync();
