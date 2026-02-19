@@ -1,11 +1,12 @@
 ﻿using Application.DTOs;
+using Application.Pagination;
 using Domain.Models;
 
 namespace Application.Abstractions
 {
     public interface IProductService
     {
-        Task<IReadOnlyCollection<ProductDto>> GetProductsAsync();
+        Task<PagedResult<ProductDto>> ListProductsAsync(PaginationOptions paginationOptions);
 
         Task<Guid> CreateProductAsync(Product product);
     }

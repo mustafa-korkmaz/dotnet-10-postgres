@@ -1,11 +1,12 @@
-﻿using Domain.Models;
+﻿using Application.Pagination;
+using Domain.Models;
 
 namespace Application.Abstractions
 {
     public interface IProductRepository
     {
-        Task<IReadOnlyCollection<Product>> ListAsync();
+        Task<PagedResult<Product>> ListProductsAsync(PaginationOptions paginationOptions);
 
-        Task CreateAsync(Product product);
+        Task CreateProductAsync(Product product);
     }
 }

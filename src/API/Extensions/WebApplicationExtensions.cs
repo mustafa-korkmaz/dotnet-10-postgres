@@ -1,4 +1,5 @@
 ﻿using API.Mappings;
+using API.Requests;
 using API.Requests.Order;
 using API.Requests.Product;
 using Application.Abstractions;
@@ -28,7 +29,8 @@ namespace API.Extensions
             });
 
             app.MapGet(ProductRoutePattern, async (
-                IProductService service) => await service.GetProductsAsync());
+                [AsParameters] PaginationRequest request,
+                IProductService service) => await service.ListProductsAsync(request.ToPaginationOptions()));
         }
 
         private static void MapOrderEndpoints(this WebApplication app)
