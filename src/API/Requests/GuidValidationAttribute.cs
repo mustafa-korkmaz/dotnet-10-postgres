@@ -2,6 +2,7 @@
 
 namespace API.Requests
 {
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter)]
     internal class GuidValidationAttribute : ValidationAttribute
     {
         public override bool IsValid(object? value)
