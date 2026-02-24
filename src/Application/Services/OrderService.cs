@@ -1,5 +1,5 @@
 ﻿using Application.Abstractions;
-using Application.DTOs;
+using Application.DTOs.Order;
 using Application.Mappings;
 using Application.Pagination;
 using Application.Queries;
@@ -35,7 +35,7 @@ namespace Application.Services
             PagedResult<Order> result = await orderRepository.ListAsync(query);
 
             return new PagedResult<OrderDto>(
-                result.Items.ToOrderDtos(),
+                result.Items.ToDtos(),
                 result.RecordsTotal);
         }
     }

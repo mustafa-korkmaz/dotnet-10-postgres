@@ -5,6 +5,8 @@ namespace Infrastructure.Persistence
 {
     public class PostgresDbContext(DbContextOptions options) : DbContext(options)
     {
+        public DbSet<User> Users { get; set; }
+
         public DbSet<Product> Products { get; set; }
 
         public DbSet<Order> Orders { get; set; }
@@ -13,6 +15,20 @@ namespace Infrastructure.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.ToTable("users");
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.Email).HasColumnName("email");
+                entity.Property(e => e.NameSurname).HasColumnName("name_surname");
+                entity.Property(e => e.EmailConfirmed).HasColumnName("email_confirmed");
+                entity.Property(e => e.PasswordHash).HasColumnName("password_hash");
+                entity.Property(e => e.CreatedAt).HasColumnName("created_at");
+
+                entity.HasIndex(e => e.Email).IsUnique();
+            });
+
             modelBuilder.Entity<Product>(entity =>
             {
                 entity.ToTable("products");

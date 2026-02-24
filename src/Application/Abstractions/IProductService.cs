@@ -1,4 +1,4 @@
-﻿using Application.DTOs;
+﻿using Application.DTOs.Product;
 using Application.Pagination;
 using Domain.Models;
 

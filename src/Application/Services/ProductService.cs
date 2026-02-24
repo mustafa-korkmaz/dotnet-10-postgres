@@ -1,5 +1,5 @@
 ﻿using Application.Abstractions;
-using Application.DTOs;
+using Application.DTOs.Product;
 using Application.Mappings;
 using Application.Pagination;
 using Domain.Models;
@@ -13,7 +13,7 @@ namespace Application.Services
             PagedResult<Product> result = await productRepository.ListAsync(paginationOptions);
 
             return new PagedResult<ProductDto>(
-                result.Items.ToProductDtos(),
+                result.Items.ToDtos(),
                 result.RecordsTotal);
         }
 

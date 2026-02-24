@@ -1,4 +1,4 @@
-﻿namespace Application.DTOs
+﻿namespace Application.DTOs.Order
 {
     public record OrderDto(
         Guid Id,

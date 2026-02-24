@@ -1,4 +1,4 @@
-﻿namespace Application.DTOs
+﻿namespace Application.DTOs.Product
 {
     public record ProductDto(
         Guid Id,

@@ -12,19 +12,6 @@ namespace Infrastructure.Persistence.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "orders",
-                columns: table => new
-                {
-                    id = table.Column<Guid>(type: "uuid", nullable: false),
-                    user_id = table.Column<Guid>(type: "uuid", nullable: false),
-                    created_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_orders", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "products",
                 columns: table => new
                 {
@@ -37,6 +24,41 @@ namespace Infrastructure.Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_products", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "users",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    email = table.Column<string>(type: "text", nullable: false),
+                    name_surname = table.Column<string>(type: "text", nullable: true),
+                    email_confirmed = table.Column<bool>(type: "boolean", nullable: false),
+                    password_hash = table.Column<string>(type: "text", nullable: false),
+                    created_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_users", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "orders",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    user_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    created_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_orders", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_orders_users_user_id",
+                        column: x => x.user_id,
+                        principalTable: "users",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -75,6 +97,17 @@ namespace Infrastructure.Persistence.Migrations
                 name: "IX_order_items_product_id",
                 table: "order_items",
                 column: "product_id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_orders_user_id",
+                table: "orders",
+                column: "user_id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_users_email",
+                table: "users",
+                column: "email",
+                unique: true);
         }
 
         /// <inheritdoc />
@@ -88,6 +121,9 @@ namespace Infrastructure.Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "products");
+
+            migrationBuilder.DropTable(
+                name: "users");
         }
     }
 }

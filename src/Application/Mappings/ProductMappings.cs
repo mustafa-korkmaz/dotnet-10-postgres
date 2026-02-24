@@ -1,19 +1,19 @@
 ﻿using Domain.Models;
-using Application.DTOs;
+using Application.DTOs.Product;
 
 namespace Application.Mappings
 {
     public static class ProductMappings
     {
-        public static IReadOnlyCollection<ProductDto> ToProductDtos(
+        public static IReadOnlyCollection<ProductDto> ToDtos(
                 this IReadOnlyCollection<Product> products)
         {
             return products
-                .Select(o => o.ToProductDto())
+                .Select(o => o.ToDto())
                 .ToList();
         }
 
-        private static ProductDto ToProductDto(this Product product)
+        private static ProductDto ToDto(this Product product)
         {
             return new ProductDto(
                 product.Id,

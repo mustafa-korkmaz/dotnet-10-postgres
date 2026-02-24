@@ -1,4 +1,4 @@
-﻿using Application.DTOs;
+﻿using Application.DTOs.Order;
 using Application.Pagination;
 using Application.Queries;
 using Domain.Models;

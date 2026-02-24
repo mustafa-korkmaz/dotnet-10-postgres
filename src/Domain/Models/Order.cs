@@ -6,6 +6,8 @@
 
         public Guid UserId { get; private init; }
 
+        public User? User { get; init; }
+
         public decimal Price => Items.Sum(x => x.GetPrice());
 
         public DateTimeOffset CreatedAt { get; private init; }

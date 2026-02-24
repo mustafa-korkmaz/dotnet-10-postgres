@@ -1,15 +1,15 @@
 ﻿using Domain.Models;
-using Application.DTOs;
+using Application.DTOs.Order;
 
 namespace Application.Mappings
 {
     public static class OrderMappings
     {
-        public static IReadOnlyCollection<OrderDto> ToOrderDtos(
+        public static IReadOnlyCollection<OrderDto> ToDtos(
             this IReadOnlyCollection<Order> orders)
         {
             return orders
-                .Select(o => o.ToOrderDto())
+                .Select(o => o.ToDto())
                 .ToList();
         }
 
@@ -35,7 +35,7 @@ namespace Application.Mappings
                 orderItem.Quantity);
         }
 
-        private static OrderDto ToOrderDto(this Order order)
+        private static OrderDto ToDto(this Order order)
         {
             return new OrderDto(
                 order.Id,
