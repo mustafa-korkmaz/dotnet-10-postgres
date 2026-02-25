@@ -6,8 +6,10 @@ namespace Application.Abstractions
     {
         Task CreateAsync(User user);
 
-        Task<User?> GetDetailsAsync(Guid id);
+        Task<User?> GetByIdAsync(Guid id);
 
         Task<User?> GetByEmailAsync(string email);
+
+        Task UpdateAsync(User user);
     }
 }

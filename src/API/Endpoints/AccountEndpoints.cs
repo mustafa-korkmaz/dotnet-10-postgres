@@ -3,6 +3,7 @@ using API.Authorization;
 using API.Mappings;
 using API.Requests.Account;
 using Application.Abstractions;
+using Application.DTOs.User;
 
 namespace API.Endpoints
 {
@@ -39,22 +40,26 @@ namespace API.Endpoints
                 ClaimsPrincipal user,
                 IAccountService service) =>
             {
-                string? userIdClaim = user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-
-                if (string.IsNullOrEmpty(userIdClaim) || !Guid.TryParse(userIdClaim, out Guid userId))
-                {
-                    return Results.Unauthorized();
-                }
-
-                var userProfile = await service.GetProfileAsync(userId);
+                UserDto userProfile = await service.GetProfileAsync(user.GetUserId());
                 return TypedResults.Ok(userProfile);
             })
             .RequireAuthorization(Policies.RequireAuthenticatedUser)
             .WithName("GetProfile")
             .WithTags(OpenApiSpecsTag);
 
+            app.MapPatch($"{RoutePattern}/profile", async (
+                ClaimsPrincipal user,
+                UpdateProfileRequest request,
+                IAccountService service) =>
+            {
+                await service.UpdateProfileAsync(user.GetUserId(), request.NameSurname);
+                return TypedResults.NoContent();
+            })
+            .RequireAuthorization(Policies.RequireAuthenticatedUser)
+            .WithName("UpdateProfile")
+            .WithTags(OpenApiSpecsTag);
+
             // Future endpoints:
-            // - PATCH /v1/account/profile - Update current authenticated user's profile
             // - POST /v1/account/password/reset - Initiate password reset (send email with reset link)
             // - POST /v1/account/password/confirm - Confirm password reset (validate token and update password)
         }

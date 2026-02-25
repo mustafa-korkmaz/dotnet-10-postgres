@@ -2,15 +2,12 @@
 
 namespace API.Requests.Order
 {
-    public class CreateOrderRequest
-    {
-        [Required(ErrorMessage = RequestValidationErrorCodes.RequiredField)]
-        [Display(Name = "ITEMS")]
-        public ICollection<OrderItemRequest>? Items { get; init; }
+    public record CreateOrderRequest(
+        [Required(ErrorMessage = RequestValidationErrorCodes.RequiredField)] [Display(Name = "ITEMS")]
+        ICollection<OrderItemRequest>? Items,
 
         [GuidValidation]
         [Required(ErrorMessage = RequestValidationErrorCodes.RequiredField)]
         [Display(Name = "USER_ID")]
-        public string? UserId { get; init; }
-    }
+        string? UserId);
 }

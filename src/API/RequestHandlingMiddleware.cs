@@ -39,8 +39,9 @@ namespace API
 
             (HttpStatusCode statusCode, string? description) = exception switch
             {
-                UnauthorizedAccessException => (HttpStatusCode.Unauthorized, message),
+                BadHttpRequestException => (HttpStatusCode.BadRequest, null), // raised by framework itself
                 InvalidOperationException => (HttpStatusCode.BadRequest, message),
+                UnauthorizedAccessException => (HttpStatusCode.Unauthorized, message),
                 KeyNotFoundException => (HttpStatusCode.NotFound, null),
                 _ => (HttpStatusCode.InternalServerError, InternalErrorMessage)
             };

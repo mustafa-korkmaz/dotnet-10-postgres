@@ -12,7 +12,7 @@ namespace Infrastructure.Persistence.Repositories
             await dbContext.SaveChangesAsync();
         }
 
-        public async Task<User?> GetDetailsAsync(Guid id)
+        public async Task<User?> GetByIdAsync(Guid id)
         {
             return await dbContext.Users
                 .FirstOrDefaultAsync(o => o.Id == id);
@@ -22,6 +22,12 @@ namespace Infrastructure.Persistence.Repositories
         {
             return await dbContext.Users
                 .FirstOrDefaultAsync(u => u.Email == email.ToLowerInvariant());
+        }
+
+        public async Task UpdateAsync(User user)
+        {
+            dbContext.Users.Update(user);
+            await dbContext.SaveChangesAsync();
         }
     }
 }

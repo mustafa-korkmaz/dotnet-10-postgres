@@ -2,19 +2,17 @@
 
 namespace API.Requests.Product
 {
-    public class CreateProductRequest
-    {
+    public record CreateProductRequest(
         [Required(ErrorMessage = RequestValidationErrorCodes.RequiredField)]
         [StringLength(100, ErrorMessage = RequestValidationErrorCodes.MaxLength)]
         [Display(Name = "NAME")]
-        public string? Name { get; init; }
+          string? Name,
 
         [Required(ErrorMessage = RequestValidationErrorCodes.RequiredField)]
         [Display(Name = "UNIT_PRICE")]
-        public decimal? UnitPrice { get; init; }
+          decimal? UnitPrice,
 
         [Required(ErrorMessage = RequestValidationErrorCodes.RequiredField)]
         [Display(Name = "STOCK_QUANTITY")]
-        public int? StockQuantity { get; init; }
-    }
+          int? StockQuantity);
 }

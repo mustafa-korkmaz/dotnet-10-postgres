@@ -2,19 +2,17 @@
 
 namespace API.Requests.Order
 {
-    public class OrderItemRequest
-    {
+    public record OrderItemRequest(
         [GuidValidation]
         [Required(ErrorMessage = RequestValidationErrorCodes.RequiredField)]
         [Display(Name = "PRODUCT_ID")]
-        public string? ProductId { get; init; }
+        string? ProductId,
 
         [Required(ErrorMessage = RequestValidationErrorCodes.RequiredField)]
         [Display(Name = "UNIT_PRICE")]
-        public decimal? UnitPrice { get; init; }
+        decimal? UnitPrice,
 
         [Required(ErrorMessage = RequestValidationErrorCodes.RequiredField)]
         [Display(Name = "QUANTITY")]
-        public int? Quantity { get; init; }
-    }
+        int? Quantity);
 }

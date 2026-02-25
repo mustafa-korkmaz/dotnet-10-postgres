@@ -2,16 +2,14 @@
 
 namespace API.Requests
 {
-    public class PaginationRequest
-    {
-        public bool? IncludeRecordsTotal { get; init; }
+    public record PaginationRequest(
+        bool? IncludeRecordsTotal,
 
-        [Range(0, 1000, ErrorMessage = RequestValidationErrorCodes.BetweenRange)]
+        [Range(0, 10000, ErrorMessage = RequestValidationErrorCodes.BetweenRange)]
         [Display(Name = "OFFSET")]
-        public int? Offset { get; init; }
+        int? Offset,
 
         [Range(1, 1000, ErrorMessage = RequestValidationErrorCodes.BetweenRange)]
         [Display(Name = "LIMIT")]
-        public int? Limit { get; init; }
-    }
+        int? Limit);
 }

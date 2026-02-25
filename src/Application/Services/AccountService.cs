@@ -20,7 +20,7 @@ namespace Application.Services
 
         public async Task<UserDto> GetProfileAsync(Guid userId)
         {
-            User? user = await userRepository.GetDetailsAsync(userId);
+            User? user = await userRepository.GetByIdAsync(userId);
 
             if (user is null)
             {
@@ -48,6 +48,20 @@ namespace Application.Services
             }
 
             return jwtTokenGenerator.GenerateToken(user);
+        }
+
+        public async Task UpdateProfileAsync(Guid userId, string? nameSurname)
+        {
+            User? user = await userRepository.GetByIdAsync(userId);
+
+            if (user is null)
+            {
+                throw new KeyNotFoundException(string.Format(NotFoundErrorMessage, userId));
+            }
+
+            user.SetNameSurname(nameSurname);
+
+            await userRepository.UpdateAsync(user);
         }
     }
 }

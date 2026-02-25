@@ -8,7 +8,7 @@ namespace Application.Abstractions
     {
         Task CreateAsync(Order order);
 
-        Task<Order?> GetDetailsAsync(Guid id);
+        Task<Order?> GetByIdAsync(Guid id);
 
         Task<PagedResult<Order>> ListAsync(ListOrdersQuery query);
     }

@@ -23,7 +23,7 @@ namespace API.Endpoints
 
             app.MapGet($"{RoutePattern}/{{id:guid}}", async (
                 Guid id,
-                IOrderService service) => await service.GetDetailsAsync(id))
+                IOrderService service) => await service.GetByIdAsync(id))
             .WithName("GetOrderDetails")
             .WithTags(OpenApiSpecsTag);
 

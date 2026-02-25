@@ -2,10 +2,11 @@
 
 namespace API.Requests.Order
 {
-    public class ListOrdersRequest : PaginationRequest
-    {
+    public record ListOrdersRequest(
         [GuidValidation]
         [Display(Name = "USER_ID")]
-        public string? UserId { get; init; }
-    }
+        string? UserId,
+        bool? IncludeRecordsTotal,
+        int? Offset,
+        int? Limit) : PaginationRequest(IncludeRecordsTotal, Offset, Limit);
 }

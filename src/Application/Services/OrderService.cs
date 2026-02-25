@@ -18,9 +18,9 @@ namespace Application.Services
             return order.Id;
         }
 
-        public async Task<OrderDetailDto> GetDetailsAsync(Guid id)
+        public async Task<OrderDetailDto> GetByIdAsync(Guid id)
         {
-            Order? order = await orderRepository.GetDetailsAsync(id);
+            Order? order = await orderRepository.GetByIdAsync(id);
 
             if (order is null)
             {
